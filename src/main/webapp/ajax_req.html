@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ajax Request</title>
+<script>
+function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","index.jsp?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
+<style type="text/css">
+ body{background-color:seagreen;font-family:Arial, Helvetica, sans-serif;color:#f9fcf5}
+ #container{display:flex;justify-content:center;}
+ table{padding:40px;}
+ tr:nth-child(1) {background-color: black;}
+ tr:nth-child(even) {background-color: #46AB58;}
+ tr:hover {background-color: coral;}
+ td{text-align:center;margin:5px;padding:5px;}
+</style>
+</head>
+<body>
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Select the list to display:</option>
+  <option value="1">Catalogue</option>
+  </select>
+</form>
+<br>
+<div id="container">
+<div id="txtHint"><b>Catalogue will be displayed here...</b></div>
+</div>
+</body>
+</html>
